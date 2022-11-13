@@ -1,7 +1,7 @@
 <template>
-  <a-layout class="">
-    <VHeader />
-    <a-layout-content></a-layout-content>
+  <a-layout>
+    <v-header />
+    <a-layout-content class="h-[calc(100vh-64px)]"></a-layout-content>
   </a-layout>
 </template>
 
