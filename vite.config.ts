@@ -12,9 +12,23 @@ export default defineConfig({
       reactivityTransform: true,
     }),
     Components({
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [
+        AntDesignVueResolver({
+          importStyle: "less",
+        }),
+      ],
     }),
   ],
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: {
+          "primary-color": "#7028e4",
+        },
+        javascriptEnabled: true,
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
