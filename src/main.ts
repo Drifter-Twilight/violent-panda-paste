@@ -2,7 +2,8 @@ import { createApp } from "vue"
 import { createPinia } from "pinia"
 import App from "./App.vue"
 import "virtual:windi.css"
-import "@/main.less"
+import "element-plus/theme-chalk/dark/css-vars.css"
+import "@/main.css"
 
 const app = createApp(App)
 

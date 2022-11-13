@@ -1,0 +1,9 @@
+:root {
+  --el-color-primary: #7028e4 !important;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

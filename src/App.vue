@@ -1,8 +1,10 @@
 <template>
-  <a-layout>
+  <el-container
+    direction="vertical"
+    class="min-w-[350px]">
     <v-header />
-    <a-layout-content class="h-[calc(100vh-64px)]"></a-layout-content>
-  </a-layout>
+    <el-main class="h-[calc(100vh-64px)]"></el-main>
+  </el-container>
 </template>
 
 <script setup lang="ts">
