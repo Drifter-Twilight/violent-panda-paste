@@ -1,9 +1,11 @@
 <template>
   <el-container
     direction="vertical"
-    class="min-w-[350px]">
+    class="min-w-[375px]">
     <v-header />
-    <el-main class="h-[calc(100vh-64px)]"></el-main>
+    <el-main class="h-[calc(100vh-64px)]">
+      <router-view></router-view>
+    </el-main>
   </el-container>
 </template>
 

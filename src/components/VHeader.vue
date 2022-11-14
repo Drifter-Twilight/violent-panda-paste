@@ -53,8 +53,8 @@ const toggleDark = useToggle(isDark)
 
 <style scoped>
 .header_switch {
-  --el-switch-on-color: #13ce66;
-  --el-switch-off-color: #ff4949;
+  --el-switch-on-color: #6a11cb;
+  --el-switch-off-color: #ffd700;
 }
 
 :deep(.el-switch__label *) {

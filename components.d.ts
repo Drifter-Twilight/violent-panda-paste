@@ -13,8 +13,10 @@ declare module '@vue/runtime-core' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    HomeHeader: typeof import('./src/components/Header/components/HomeHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VCard: typeof import('./src/components/VCard.vue')['default']
     VHeader: typeof import('./src/components/VHeader.vue')['default']
   }
 }
