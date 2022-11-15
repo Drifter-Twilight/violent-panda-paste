@@ -7,19 +7,23 @@
     :xl="4"
     class="p-1 sm:p-5 md:p-3 2xl:p-5 mt-2">
     <div
-      class="h-20 sm:h-24 lg:h-28 2xl:h-32 flex justify-between items-center box overflow-hidden rounded-2xl transition-all hover:shadow-md hover:shadow-gray-600">
+      class="h-20 sm:h-24 lg:h-28 2xl:h-32 flex justify-between items-center box overflow-hidden rounded-2xl transition-all hover:shadow-md hover:shadow-gray-400 bg-gradient-to-r text-white card_bg">
       <div
-        class="flex justify-between items-center flex-col w-[60%] h-full bg-green-600 pt-2">
+        class="relative flex justify-between items-start flex-col w-[55%] h-full pt-2 pb-3 ml-3 card_left-bg">
+        <div class="absolute left-0 top-0 bottom-0 right-0 z-0">
+          <slot name="cardBg"></slot>
+        </div>
         <h1
-          class="font-bold card_title text-sm sm:text-lg md:text-lg xl:text-2xl 2xl:text-3xl">
+          class="font-bold card_title text-sm sm:text-lg md:text-lg xl:text-2xl 2xl:text-3xl z-10">
           {{ cardProps.cardTitle }}
         </h1>
         <p
-          class="overflow-hidden card_desc w-full text-xs text-ellipsis whitespace-nowrap mb-3">
+          class="overflow-hidden card_desc w-full text-xs text-ellipsis whitespace-nowrap z-10"
+          :title="cardProps.cardDesc">
           {{ cardProps.cardDesc }}
         </p>
       </div>
-      <div class="flex-center box w-[40%] p-2 h-full bg-blue-600">
+      <div class="flex-center box w-[45%] p-2 h-full">
         <slot name="lottie">
           <img
             src="@/assets/images/logo.png"
@@ -31,24 +35,30 @@
 </template>
 
 <script setup lang="ts">
-const cardProps = defineProps({
-  cardTitle: {
-    type: String,
-    required: true,
-  },
-  cardDesc: {
-    type: String,
-    required: true,
-  },
-})
+interface CardProps {
+  cardTitle: string
+  cardDesc: string
+  cardColor: string[]
+}
+
+const cardProps = defineProps<CardProps>()
 </script>
 
 <style scoped>
 .card_title {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .card_desc {
   transform: scale(0.8);
+  transform-origin: 0 0;
+}
+
+.card_bg {
+  background-image: linear-gradient(
+    to right,
+    v-bind("cardProps.cardColor[0]") 0,
+    v-bind("cardProps.cardColor[1]") 100%
+  );
 }
 </style>

@@ -2,6 +2,10 @@
   --el-color-primary: #7028e4 !important;
 }
 
+html {
+  font-family: "微軟正黑體", Consolas, "Courier New", monospace;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
