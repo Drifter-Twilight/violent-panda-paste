@@ -14,6 +14,7 @@ const props = defineProps({
 })
 
 let animation = $ref(null)
+
 onMounted(async () => {
   let res = await import(`../assets/lottie/${props.lottie}.json`)
 

@@ -1,11 +1,12 @@
 <template>
-  <el-row>
+  <el-row class="p-[20px]">
     <v-card
       v-for="item in list"
       :key="item.title"
       :card-title="item.title"
       :card-desc="item.desc"
-      :card-color="item.cardColor">
+      :card-color="item.cardColor"
+      @click="skipToTarget(item.lottie)">
       <template #cardBg>
         <v-lottie :lottie="'card-bg'" />
       </template>
@@ -18,8 +19,11 @@
 
 <script setup lang="ts">
 import { reactive } from "vue"
+import { useRouter } from "vue-router"
 import VCard from "@/components/VCard.vue"
 import VLottie from "@/components/VLottie.vue"
+
+const router = useRouter()
 
 const list = reactive([
   {
@@ -35,6 +39,10 @@ const list = reactive([
     cardColor: ["#16a085", "#f4d03f"],
   },
 ])
+
+function skipToTarget(target: string) {
+  router.push(`/${target}`)
+}
 </script>
 
 <style scoped></style>
