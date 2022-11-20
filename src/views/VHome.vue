@@ -1,25 +1,30 @@
 <template>
-  <el-row class="p-[20px]">
-    <v-card
-      v-for="item in list"
-      :key="item.title"
-      :card-title="item.title"
-      :card-desc="item.desc"
-      :card-color="item.cardColor"
-      @click="skipToTarget(item.lottie)">
-      <template #cardBg>
-        <v-lottie :lottie="'card-bg'" />
-      </template>
-      <template #lottie>
-        <v-lottie :lottie="item.lottie" />
-      </template>
-    </v-card>
-  </el-row>
+  <v-header />
+  <v-main>
+    <el-row class="p-[20px]">
+      <v-card
+        v-for="item in list"
+        :key="item.title"
+        :card-title="item.title"
+        :card-desc="item.desc"
+        :card-color="item.cardColor"
+        @click="skipToTarget(item.lottie)">
+        <template #cardBg>
+          <v-lottie :lottie="'card-bg'" />
+        </template>
+        <template #lottie>
+          <v-lottie :lottie="item.lottie" />
+        </template>
+      </v-card>
+    </el-row>
+  </v-main>
 </template>
 
 <script setup lang="ts">
 import { reactive } from "vue"
 import { useRouter } from "vue-router"
+import VHeader from "@/components/VContainer/VHeader.vue"
+import VMain from "@/components/VContainer/VMain.vue"
 import VCard from "@/components/VCard.vue"
 import VLottie from "@/components/VLottie.vue"
 

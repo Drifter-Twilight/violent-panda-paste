@@ -7,12 +7,16 @@
 </template>
 
 <script setup lang="ts">
+import { useStorage } from "@vueuse/core"
+
 interface TagProps {
+  tip: string
   width: string
   height: string
 }
-
 const tagProps = defineProps<TagProps>()
+
+const isDark = useStorage("theme-mode", "auto")
 </script>
 
 <style scoped>
