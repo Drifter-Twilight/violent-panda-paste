@@ -3,13 +3,15 @@
     <el-row v-if="isBig">
       <el-col
         :span="24"
-        class="relative flex items-center h-screen"
-        :class="
-          route.path == '/lucky-draw/form' ? 'justify-start' : 'justify-end'
-        ">
-        <router-view></router-view>
-        <lucky-img />
-        <lucky-switch />
+        class="flex items-center h-screen">
+        <router-view #="{ Component, route }">
+          <lucky-container :title="`${route.meta.title}`">
+            <template v-slot:[`${route.meta.position}`]>
+              <lucky-img></lucky-img>
+            </template>
+            <component :is="Component"></component>
+          </lucky-container>
+        </router-view>
       </el-col>
     </el-row>
 
@@ -20,15 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from "vue-router"
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 import VMain from "@/components/VContainer/VMain.vue"
+import LuckyContainer from "./components/LuckyContainer.vue"
 import LuckyImg from "./components/LuckyImg.vue"
-import LuckySwitch from "./components/LuckySwitch.vue"
 import VScreenTip from "@/components/VscreenTip.vue"
 import "element-plus/theme-chalk/display.css"
 
-const route = useRoute()
 const { greater } = useBreakpoints(breakpointsTailwind)
 let isBig = greater("sm")
 </script>

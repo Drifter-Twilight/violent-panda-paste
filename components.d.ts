@@ -8,8 +8,14 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCard: typeof import('element-plus/es')['ElCard']
+    ElCarousel: typeof import('element-plus/es')['ElCarousel']
+    ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
+    ElDescriptions: typeof import('element-plus/es')['ElDescriptions']
+    ElDescriptionsIte: typeof import('element-plus/es')['ElDescriptionsIte']
+    ElDescriptionsItem: typeof import('element-plus/es')['ElDescriptionsItem']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
@@ -25,15 +31,21 @@ declare module '@vue/runtime-core' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
-    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     VCard: typeof import('./src/components/VCard.vue')['default']
+    VDeveloper: typeof import('./src/components/VDeveloper.vue')['default']
+    VFile: typeof import('./src/components/VFile/index.vue')['default']
+    VFileDetail: typeof import('./src/components/VFile/VFileDetail.vue')['default']
+    VFileRead: typeof import('./src/components/VFile/VFileRead.vue')['default']
     VHeader: typeof import('./src/components/VContainer/VHeader.vue')['default']
     VLottie: typeof import('./src/components/VLottie.vue')['default']
     VMain: typeof import('./src/components/VContainer/VMain.vue')['default']
     VscreenTip: typeof import('./src/components/VscreenTip.vue')['default']
-    VScreenTip: typeof import('./src/components/VScreenTip.vue')['default']
+    VScreenTip: typeof import("./src/components/VScreenTip.vue")["default"]
     VSwitchType: typeof import('./src/components/VSwitchType.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

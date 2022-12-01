@@ -6,10 +6,6 @@ html {
   font-family: "微軟正黑體", Consolas, "Courier New", monospace;
 }
 
-:deep(.el-input__inner:focus) {
-  box-shadow: none;
-}
-
 .flex-center {
   display: flex;
   justify-content: center;

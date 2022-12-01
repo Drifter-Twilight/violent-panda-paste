@@ -12,11 +12,24 @@ const routes: readonly RouteRecordRaw[] = [
         path: "form",
         name: "form",
         component: () => import("@/views/VLuckyDraw/views/LuckyForm.vue"),
+        meta: { position: "right", title: "表单填写" },
       },
       {
         path: "file",
         name: "file",
         component: () => import("@/views/VLuckyDraw/views/LuckyFile.vue"),
+        meta: { position: "left", title: "文件读取" },
+      },
+    ],
+  },
+  {
+    path: "/random-roll-call",
+    redirect: "/random-roll-call/file",
+    component: () => import("@/views/VCallRoll/index.vue"),
+    children: [
+      {
+        path: "file",
+        component: () => import("@/views/VCallRoll/views/RollCallFile.vue"),
       },
     ],
   },

@@ -6,4 +6,22 @@
   </el-container>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted } from "vue"
+import { useStorage } from "@vueuse/core"
+
+onMounted(() => {
+  let theme = useStorage("theme-mode", "auto")
+  if (theme.value == "auto") {
+    document.documentElement.className = "auto"
+  } else {
+    document.documentElement.className = "dark"
+  }
+})
+</script>
+
+<style scoped>
+:deep(.el-input__inner:focus) {
+  box-shadow: none;
+}
+</style>
