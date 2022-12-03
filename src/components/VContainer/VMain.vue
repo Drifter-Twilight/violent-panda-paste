@@ -1,6 +1,8 @@
 <template>
   <el-main class="v_main">
-    <slot></slot>
+    <el-scrollbar :height="height">
+      <slot></slot>
+    </el-scrollbar>
   </el-main>
 </template>
 

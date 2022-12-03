@@ -10,7 +10,6 @@
 import { useStorage } from "@vueuse/core"
 
 interface TagProps {
-  tip: string
   width: string
   height: string
 }

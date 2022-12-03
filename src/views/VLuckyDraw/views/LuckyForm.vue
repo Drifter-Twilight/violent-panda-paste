@@ -131,6 +131,7 @@
 
 <script setup lang="ts">
 import { reactive } from "vue"
+import { useRouter } from "vue-router"
 import { ElMessage } from "element-plus"
 import type { FormInstance } from "element-plus"
 import { CirclePlus, CircleClose } from "@element-plus/icons-vue"
@@ -180,6 +181,7 @@ function subItem(id: number) {
   calcPro(false)
 }
 
+const formRouter = useRouter()
 async function getLuckyData(formEl: FormInstance | undefined) {
   if (!formEl) return
 
@@ -198,7 +200,7 @@ async function getLuckyData(formEl: FormInstance | undefined) {
         showClose: true,
       })
     } else {
-      console.log("good!")
+      formRouter.push("/lucky-draw/redpacket")
     }
   })
 }

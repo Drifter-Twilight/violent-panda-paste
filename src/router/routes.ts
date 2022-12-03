@@ -20,6 +20,18 @@ const routes: readonly RouteRecordRaw[] = [
         component: () => import("@/views/VLuckyDraw/views/LuckyFile.vue"),
         meta: { position: "left", title: "文件读取" },
       },
+      {
+        path: "redpacket",
+        component: () => import("@/views/VLuckyDraw/views/LuckyRedpacket.vue"),
+      },
+      {
+        path: "turntable",
+        component: () => import("@/views/VLuckyDraw/views/LuckyTurntable.vue"),
+      },
+      {
+        path: "scratch-off",
+        component: () => import("@/views/VLuckyDraw/views/LuckyScratchOff.vue"),
+      },
     ],
   },
   {
