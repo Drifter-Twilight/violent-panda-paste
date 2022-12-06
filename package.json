@@ -13,6 +13,7 @@
     "@element-plus/icons-vue": "^2.0.10",
     "@vueuse/core": "^9.5.0",
     "animate.css": "^4.1.1",
+    "echarts": "^5.4.0",
     "element-plus": "^2.2.21",
     "lottie-web": "^5.9.6",
     "mitt": "^3.0.0",

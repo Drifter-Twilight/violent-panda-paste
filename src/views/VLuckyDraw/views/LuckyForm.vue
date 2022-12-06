@@ -200,7 +200,7 @@ async function getLuckyData(formEl: FormInstance | undefined) {
         showClose: true,
       })
     } else {
-      formRouter.push("/lucky-draw/redpacket")
+      formRouter.push("/lucky-draw/turntable")
     }
   })
 }

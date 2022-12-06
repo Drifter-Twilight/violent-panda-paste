@@ -3,7 +3,7 @@
     <el-row v-if="isBig">
       <el-col
         :span="24"
-        class="flex items-center h-screen flex-wrap">
+        class="relative flex items-center h-screen flex-wrap">
         <router-view #="{ Component, route }">
           <lucky-container
             v-if="route.meta.position"
