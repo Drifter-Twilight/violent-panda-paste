@@ -2,45 +2,38 @@
   <el-row
     justify="center"
     align="middle"
-    class="content-center">
+    class="content-center overflow-hidden">
     <el-col
       :span="24"
-      class="ratio-1 relative flex-center">
+      class="relative flex-center">
       <v-lottie
         lottie="file-read"
         class="file_lottie ratio-1 absolute left-1/2 top-1/2 z-0 w-full" />
 
       <div
-        class="box flex-center flex-col z-10 w-1/2 h-1/2 rounded-full cursor-pointer"
+        class="ratio-1 box flex-center flex-col z-10 w-1/2 h-1/2 rounded-full cursor-pointer"
         @click="readFile">
         <el-icon
-          size="2rem"
+          size="2.5rem"
           color="white"
-          class="font-bold text-shadow-xl"
-          ><Document
+          class="font-bold text-shadow-xl mb-5"
+          ><Plus
         /></el-icon>
+        <p class="text-xs">请选择{{ tip ? tip : "一份XLSX" }}文件</p>
       </div>
-    </el-col>
-
-    <el-col
-      :span="20"
-      class="file_tip rounded-full p-3 outline bg-[#615da4]">
-      <p class="text-center text-sm tracking-widest text-white">
-        Tips: 请上传一份{{ desc }}文件
-      </p>
     </el-col>
   </el-row>
 </template>
 
 <script setup lang="ts">
 import { useFileSystemAccess } from "@vueuse/core"
-import { Document } from "@element-plus/icons-vue"
+import { Plus } from "@element-plus/icons-vue"
 import VLottie from "@/components/VLottie.vue"
+import { bus } from "@/eventBus/"
 
-const fileProps = defineProps({
-  desc: String,
-})
-const fileEmits = defineEmits(["getFileData"])
+const fileReadProps = defineProps<{
+  tip?: string
+}>()
 
 const res = useFileSystemAccess({
   dataType: "ArrayBuffer",
@@ -54,7 +47,9 @@ const res = useFileSystemAccess({
     {
       description: "xlsx",
       accept: {
-        "application/vnd.ms-excel": [".xlsx"],
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+          ".xlsx",
+        ],
       },
     },
   ],
@@ -64,12 +59,15 @@ const res = useFileSystemAccess({
 async function readFile() {
   await res.open()
   if (res.data.value) {
-    fileEmits("getFileData", {
-      fileName: res.fileName.value,
-      data: res.data.value,
-      fileSize: res.fileSize.value,
-      fileMIME: res.fileMIME.value,
-      lastModified: res.fileLastModified.value,
+    bus.emit("getFileDetail", {
+      showDrawer: true,
+      fileInfo: {
+        fileName: res.fileName.value,
+        data: res.data.value,
+        fileSize: res.fileSize.value,
+        fileMIME: res.fileMIME.value,
+        lastModified: res.fileLastModified.value,
+      },
     })
   }
 }
@@ -85,7 +83,7 @@ async function readFile() {
   background-image: radial-gradient(
     50% 50%,
     #615da4b9 0 45%,
-    transparent 46% 100%
+    transparent 50% 100%
   );
 }
 

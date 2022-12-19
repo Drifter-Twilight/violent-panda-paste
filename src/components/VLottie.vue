@@ -1,17 +1,16 @@
 <template>
-  <div ref="animation"></div>
+  <div
+    ref="animation"
+    class="box"></div>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from "vue"
 import lottie from "lottie-web"
 
-const props = defineProps({
-  lottie: {
-    type: String,
-    required: true,
-  },
-})
+const props = defineProps<{
+  lottie: string
+}>()
 
 let animation = $ref(null)
 

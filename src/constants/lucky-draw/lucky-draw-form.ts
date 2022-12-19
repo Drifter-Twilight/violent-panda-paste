@@ -4,7 +4,6 @@ export enum luckyFormRadio {
 }
 
 export enum luckyFormPlayMethods {
-  REDPACKET = "红包抽奖",
-  SCRAPE = "刮刮乐",
-  TURNTABLE = "大转盘",
+  redpacket = "红包抽奖",
+  turntable = "大转盘",
 }

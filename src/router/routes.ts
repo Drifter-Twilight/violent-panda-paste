@@ -10,38 +10,35 @@ const routes: readonly RouteRecordRaw[] = [
     children: [
       {
         path: "form",
-        name: "form",
         component: () => import("@/views/VLuckyDraw/views/LuckyForm.vue"),
-        meta: { position: "right", title: "表单填写" },
       },
       {
         path: "file",
-        name: "file",
         component: () => import("@/views/VLuckyDraw/views/LuckyFile.vue"),
-        meta: { position: "left", title: "文件读取" },
       },
       {
         path: "redpacket",
         component: () => import("@/views/VLuckyDraw/views/LuckyRedpacket.vue"),
+        props: true,
       },
       {
         path: "turntable",
         component: () => import("@/views/VLuckyDraw/views/LuckyTurntable.vue"),
-      },
-      {
-        path: "scratch-off",
-        component: () => import("@/views/VLuckyDraw/views/LuckyScratchOff.vue"),
       },
     ],
   },
   {
     path: "/random-roll-call",
     redirect: "/random-roll-call/file",
-    component: () => import("@/views/VCallRoll/index.vue"),
+    component: () => import("@/views/VRollCall/index.vue"),
     children: [
       {
         path: "file",
-        component: () => import("@/views/VCallRoll/views/RollCallFile.vue"),
+        component: () => import("@/views/VRollCall/views/RollCallFile.vue"),
+      },
+      {
+        path: "roll-call",
+        component: () => import("@/views/VRollCall/views/RollCall.vue"),
       },
     ],
   },

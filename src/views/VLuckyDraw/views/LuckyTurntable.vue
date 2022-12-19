@@ -19,66 +19,40 @@
 
 <script setup lang="ts">
 import { onMounted, reactive } from "vue"
+import { storeToRefs } from "pinia"
 import * as echarts from "echarts/core"
 import { TooltipComponent } from "echarts/components"
 import { PieChart } from "echarts/charts"
 import { LabelLayout } from "echarts/features"
 import { CanvasRenderer } from "echarts/renderers"
 import { ElMessageBox } from "element-plus"
+import { useLuckyStore } from "@/stores/luckyDraw/"
 import getRandom from "@/utils/getRandom"
 
-echarts.use([TooltipComponent, PieChart, CanvasRenderer, LabelLayout])
+const { luckyData } = storeToRefs(useLuckyStore())
 
-let pieData = reactive([
-  {
-    value: 100,
-    name: "现金十元",
-    startAngel: 0,
-    endAngel: 59,
-    selected: false,
-    label: { rotate: 330 },
-  },
-  {
-    value: 100,
-    name: "现金五元",
-    startAngel: 60,
-    endAngel: 119,
-    selected: false,
-    label: { rotate: 270 },
-  },
-  {
-    value: 100,
-    name: "棒棒糖一根",
-    startAngel: 120,
-    endAngel: 179,
-    selected: false,
-    label: { rotate: 210 },
-  },
-  {
-    value: 100,
-    name: "棒棒糖两根",
-    startAngel: 180,
-    endAngel: 239,
-    selected: false,
-    label: { rotate: 150 },
-  },
-  {
-    value: 100,
-    name: "背诵出师表",
-    startAngel: 240,
-    endAngel: 299,
-    selected: false,
-    label: { rotate: 90 },
-  },
-  {
-    value: 100,
-    name: "背诵滕王阁序",
-    startAngel: 300,
-    endAngel: 359,
-    selected: false,
-    label: { rotate: 30 },
-  },
-])
+function formatData() {
+  let itemDeg = 0
+  let startDeg = 0
+  let endDeg = 0
+
+  return luckyData.value?.map((item, index) => {
+    itemDeg = 360 * item.value
+    startDeg = index == 0 ? 0 : endDeg + 1
+    endDeg = startDeg + itemDeg - 1
+
+    return {
+      ...item,
+      startDeg,
+      endDeg,
+      label: {
+        rotate: 360 - (endDeg + startDeg) / 2,
+      },
+    }
+  })
+}
+
+let pieData = $ref(formatData())
 
 let option = reactive({
   series: [
@@ -89,9 +63,8 @@ let option = reactive({
       label: {
         show: true,
         position: "inside",
-        fontSize: 20,
+        fontSize: 18,
         color: "#fff",
-        overflow: "break",
       },
       itemStyle: {
         color: (params: any) =>
@@ -103,6 +76,7 @@ let option = reactive({
 })
 
 onMounted(() => {
+  echarts.use([TooltipComponent, PieChart, CanvasRenderer, LabelLayout])
   let pieChart = document.getElementById("pieChart")
   let myChart = echarts.init(pieChart!)
   option && myChart.setOption(option)
@@ -116,22 +90,23 @@ let pieChart = $ref<HTMLDivElement>()
 let rotateDeg = 0
 let randomDeg = 0
 function startDraw() {
-  pieChart!.classList.remove("duration-[0ms]")
-  pieChart!.classList.add("duration-[5000ms]")
+  pieChart?.classList.remove("duration-[0ms]")
+  pieChart?.classList.add("duration-[5000ms]")
   randomDeg = getRandom(0, 360)
   rotateDeg = 3600 + randomDeg
   pieChart!.style.transform = `rotate(${rotateDeg}deg)`
 }
 
+let targetData: typeof pieData
 function getResult() {
   rotateDeg = randomDeg
-  pieChart!.classList.replace("duration-[5000ms]", "duration-[0ms]")
+  pieChart?.classList.replace("duration-[5000ms]", "duration-[0ms]")
   pieChart!.style.transform = `rotate(${rotateDeg}deg)`
-  let targetData = pieData.filter(
-    item =>
-      360 - rotateDeg >= item.startAngel && 360 - rotateDeg <= item.endAngel
+  targetData = pieData?.filter(
+    item => 360 - rotateDeg >= item.startDeg && 360 - rotateDeg <= item.endDeg
   )
-  ElMessageBox.confirm(targetData[0].name, "抽奖结果", {
+
+  ElMessageBox.confirm(targetData?.[0].name, "抽奖结果", {
     confirmButtonText: "确定",
     type: "success",
     showCancelButton: false,

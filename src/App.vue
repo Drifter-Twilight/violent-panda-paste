@@ -21,6 +21,13 @@ onMounted(() => {
 </script>
 
 <style scoped>
+:deep(.el-input__inner) {
+  background-color: transparent;
+  font-size: smaller;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 :deep(.el-input__inner:focus) {
   box-shadow: none;
 }

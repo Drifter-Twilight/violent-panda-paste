@@ -7,21 +7,16 @@
 </template>
 
 <script setup lang="ts">
-import { useStorage } from "@vueuse/core"
-
 interface TagProps {
-  width: string
-  height: string
+  size: string
 }
 const tagProps = defineProps<TagProps>()
-
-const isDark = useStorage("theme-mode", "auto")
 </script>
 
 <style scoped>
 .vtag_container {
-  width: v-bind("tagProps.width") !important;
-  height: v-bind("tagProps.height") !important;
+  width: v-bind("tagProps.size") !important;
+  height: v-bind("tagProps.size") !important;
   background-color: var(--el-bg-color);
 }
 </style>
