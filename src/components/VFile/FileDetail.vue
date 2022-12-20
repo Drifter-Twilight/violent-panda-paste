@@ -86,13 +86,16 @@
 import { reactive, onMounted, computed } from "vue"
 import { useRouter } from "vue-router"
 import VRadio from "@/components/VRadio.vue"
+import { useRollCallStore } from "@/stores/randomRollCall/"
+import parseFileData from "@/utils/parseFileData/"
 import { bus } from "@/eventBus/"
 
-const FileDetail = defineProps<{
+const fileDetail = defineProps<{
   radioList: object
   toTarget: string
+  callback?: () => void
 }>()
-let modelVal = computed(() => FileDetail.toTarget)
+let modelVal = computed(() => fileDetail.toTarget)
 
 let drawer = $ref(false)
 let file = $ref<EventBus.FileInfo>({
@@ -114,8 +117,10 @@ const fileForm = reactive({
 })
 
 const fileRouter = useRouter()
+const { setRollCallData } = useRollCallStore()
 function submit() {
-  fileRouter.push('/random-roll-call/roll-call')
+  setRollCallData(parseFileData(file.data, fileForm.theadLevel))
+  fileRouter.push("/random-roll-call/roll-call")
 }
 </script>
 

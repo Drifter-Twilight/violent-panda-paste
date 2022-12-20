@@ -37,7 +37,7 @@ function formatData() {
   let endDeg = 0
 
   return luckyData.value?.map((item, index) => {
-    itemDeg = 360 * item.value
+    itemDeg = 360 * +item.value
     startDeg = index == 0 ? 0 : endDeg + 1
     endDeg = startDeg + itemDeg - 1
 
@@ -106,7 +106,7 @@ function getResult() {
     item => 360 - rotateDeg >= item.startDeg && 360 - rotateDeg <= item.endDeg
   )
 
-  ElMessageBox.confirm(targetData?.[0].name, "抽奖结果", {
+  ElMessageBox.confirm(`${targetData?.[0].name}`, "抽奖结果", {
     confirmButtonText: "确定",
     type: "success",
     showCancelButton: false,
