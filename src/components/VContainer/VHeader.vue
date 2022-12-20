@@ -8,27 +8,50 @@
         :sm="5"
         :md="4"
         :lg="3"
-        :xl="3"
         class="h-[64px]">
         <img
           src="@/assets/images/logo.png"
           alt="logo"
-          class="h-[60px]" />
+          class="h-[60px] cursor-pointer"
+          @click="useRouter().push('/home')" />
       </el-col>
       <el-col
-        :xs="10"
-        :sm="5"
-        :md="4"
-        :lg="3"
-        :xl="3"
-        class="flex justify-end items-center">
-        <el-switch
-          v-model="theme"
-          size="large"
-          :active-icon="Moon"
-          :inactive-icon="Sunny"
-          class="header_switch"
-          @change="toggleDark()" />
+        :span="1"
+        :xs="6"
+        :sm="3"
+        :lg="2"
+        :xl="1"
+        class="!flex justify-evenly items-center">
+        <el-icon
+          v-if="theme == false"
+          size="1.5rem"
+          class="cursor-pointer"
+          @click="toggleTheme"
+          ><Sunny
+        /></el-icon>
+        <el-icon
+          v-else
+          size="1.5rem"
+          class="cursor-pointer"
+          @click="toggleTheme"
+          ><Moon
+        /></el-icon>
+
+        <a
+          href="https://github.com/Drifter-Twilight/violent-panda-paste"
+          target="_blnak"
+          class="flex-center text-3xl">
+          <i class="el-icon"
+            ><svg
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 24 24"
+              width="2em"
+              height="2em">
+              <path
+                fill="currentColor"
+                d="M12 2C6.475 2 2 6.475 2 12a9.994 9.994 0 0 0 6.838 9.488c.5.087.687-.213.687-.476c0-.237-.013-1.024-.013-1.862c-2.512.463-3.162-.612-3.362-1.175c-.113-.288-.6-1.175-1.025-1.413c-.35-.187-.85-.65-.013-.662c.788-.013 1.35.725 1.538 1.025c.9 1.512 2.338 1.087 2.912.825c.088-.65.35-1.087.638-1.337c-2.225-.25-4.55-1.113-4.55-4.938c0-1.088.387-1.987 1.025-2.688c-.1-.25-.45-1.275.1-2.65c0 0 .837-.262 2.75 1.026a9.28 9.28 0 0 1 2.5-.338c.85 0 1.7.112 2.5.337c1.912-1.3 2.75-1.024 2.75-1.024c.55 1.375.2 2.4.1 2.65c.637.7 1.025 1.587 1.025 2.687c0 3.838-2.337 4.688-4.562 4.938c.362.312.675.912.675 1.85c0 1.337-.013 2.412-.013 2.75c0 .262.188.574.688.474A10.016 10.016 0 0 0 22 12c0-5.525-4.475-10-10-10z"></path></svg
+          ></i>
+        </a>
       </el-col>
     </el-row>
   </el-header>
@@ -36,28 +59,25 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue"
+import { useRouter } from "vue-router"
 import { useDark, useToggle, useStorage } from "@vueuse/core"
 import { Sunny, Moon } from "@element-plus/icons-vue"
 
-let theme = $ref(false)
+let theme = useStorage("dark-mode", false)
 onMounted(() => {
-  let themeMode = useStorage("theme-mode", "auto")
-  themeMode.value === "auto" ? (theme = false) : (theme = true)
+  if (theme.value == false) {
+    document.documentElement.className = "auto"
+  } else {
+    document.documentElement.className = "dark"
+  }
 })
 
 const isDark = useDark({
-  storageKey: "theme-mode",
+  storageKey: "dark-mode",
 })
 const toggleDark = useToggle(isDark)
+
+function toggleTheme() {
+  theme.value = toggleDark()
+}
 </script>
-
-<style scoped>
-.header_switch {
-  --el-switch-on-color: #615da4;
-  --el-switch-off-color: #ffd700;
-}
-
-:deep(.el-switch__label *) {
-  font-size: 20px;
-}
-</style>
