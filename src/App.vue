@@ -7,16 +7,24 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue"
-import { useStorage } from "@vueuse/core"
+import { onMounted, onUnmounted, watchEffect, type WatchStopHandle } from "vue"
+import { storeToRefs } from "pinia"
+import { useThemeStore } from "@/stores/themeStore/"
 
+let themeStore = storeToRefs(useThemeStore())
+let unwatch: WatchStopHandle
 onMounted(() => {
-  let theme = useStorage("theme-mode", "auto")
-  if (theme.value == "auto") {
-    document.documentElement.className = "auto"
-  } else {
-    document.documentElement.className = "dark"
-  }
+  unwatch = watchEffect(() => {
+    if (themeStore.darkMode.value == false) {
+      document.documentElement.className = "auto"
+    } else {
+      document.documentElement.className = "dark"
+    }
+  })
+})
+
+onUnmounted(() => {
+  unwatch()
 })
 </script>
 

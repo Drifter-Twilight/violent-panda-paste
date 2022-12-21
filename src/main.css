@@ -1,9 +1,28 @@
 :root {
-  --el-color-primary: #615da4 !important;
+  --el-color-primary: rgb(95, 92, 163);
+  --el-color-primary-light-3: rgb(108, 104, 184);
+  --el-color-primary-light-5: rgb(120, 115, 204);
+  --el-color-primary-light-7: rgb(130, 125, 221);
+  --el-color-primary-light-8: rgb(140, 134, 238);
+  --el-color-primary-light-9: rgb(150, 144, 255);
+  --el-color-primary-dark: rgb(97, 93, 164);
+  --el-color-primary-light-3: rgb(105, 102, 255);
+  --el-color-primary-light-5: rgb(60, 51, 185);
+  --el-color-primary-light-7: rgb(48, 42, 138);
+  --el-color-primary-light-8: rgb(33, 39, 91);
+  --el-color-primary-light-9: rgb(24, 24, 44);
 }
 
 html {
   font-family: "微軟正黑體", Consolas, "Courier New", monospace;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  /* background-size: 50% 100%; */
+  background-position: right bottom;
 }
 
 .flex-center {

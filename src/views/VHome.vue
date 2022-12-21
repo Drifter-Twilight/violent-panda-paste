@@ -9,9 +9,6 @@
         :card-desc="item.desc"
         :card-color="item.cardColor"
         @click="skipToTarget(item.lottie)">
-        <template #cardBg>
-          <v-lottie :lottie="'card-bg'" />
-        </template>
         <template #lottie>
           <v-lottie :lottie="item.lottie" />
         </template>

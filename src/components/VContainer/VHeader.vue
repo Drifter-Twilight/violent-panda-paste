@@ -21,19 +21,21 @@
         :sm="3"
         :lg="2"
         :xl="1"
-        class="!flex justify-evenly items-center">
+        class="!flex justify-evenly items-center font-bold">
         <el-icon
-          v-if="theme == false"
+          v-if="!darkMode"
           size="1.5rem"
+          color="#fcc307"
           class="cursor-pointer"
-          @click="toggleTheme"
+          @click="setDarkMode(true)"
           ><Sunny
         /></el-icon>
         <el-icon
           v-else
           size="1.5rem"
+          color="#615da4"
           class="cursor-pointer"
-          @click="toggleTheme"
+          @click="setDarkMode(false)"
           ><Moon
         /></el-icon>
 
@@ -58,26 +60,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue"
 import { useRouter } from "vue-router"
-import { useDark, useToggle, useStorage } from "@vueuse/core"
 import { Sunny, Moon } from "@element-plus/icons-vue"
+import { storeToRefs } from "pinia"
+import { useThemeStore } from "@/stores/themeStore/"
 
-let theme = useStorage("dark-mode", false)
-onMounted(() => {
-  if (theme.value == false) {
-    document.documentElement.className = "auto"
-  } else {
-    document.documentElement.className = "dark"
-  }
-})
-
-const isDark = useDark({
-  storageKey: "dark-mode",
-})
-const toggleDark = useToggle(isDark)
-
-function toggleTheme() {
-  theme.value = toggleDark()
-}
+const { setDarkMode } = useThemeStore()
+let { darkMode } = storeToRefs(useThemeStore())
 </script>
