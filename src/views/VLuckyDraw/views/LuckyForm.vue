@@ -13,10 +13,12 @@
           message: '请选择一种模式',
           trigger: 'blur',
         }">
-        <v-radio
-          v-model:modelVal="luckyForm.proType"
-          :radioList="luckyFormRadio"
-          radio-btn />
+        <el-radio-group v-model="luckyForm.proType">
+          <el-radio-button
+            v-for="item in luckyFormRadio"
+            :key="item"
+            :label="item" />
+        </el-radio-group>
       </el-form-item>
 
       <el-form-item label="内容 / 概率">
@@ -43,8 +45,7 @@
                 }">
                 <el-input
                   v-model="item.name"
-                  placeholder="内容"
-                  clearable />
+                  placeholder="内容" />
               </el-form-item>
             </el-col>
 
@@ -105,9 +106,12 @@
           message: '请选择一种玩法',
           trigger: 'blur',
         }">
-        <v-radio
-          v-model:modelVal="luckyForm.playMethods"
-          :radioList="luckyFormPlayMethods" />
+        <el-radio-group v-model="luckyForm.playMethods">
+          <el-radio
+            v-for="item in luckyDrawModel"
+            :key="`${item}model`"
+            :label="item.name" />
+        </el-radio-group>
       </el-form-item>
 
       <el-form-item>
@@ -133,8 +137,7 @@ import { CirclePlus, CircleClose } from "@element-plus/icons-vue"
 import { useLuckyStore } from "@/stores/luckyDraw/"
 import LuckyContainer from "../components/LuckyContainer.vue"
 import LuckyImg from "../components/LuckyImg.vue"
-import VRadio from "@/components/VRadio.vue"
-import { luckyFormRadio, luckyFormPlayMethods } from "@/constants/lucky-draw"
+import { luckyFormRadio, luckyDrawModel } from "@/constants/lucky-draw"
 import type { FormInstance } from "element-plus"
 
 const luckyFormRulesRef = $ref<FormInstance>()
@@ -152,7 +155,7 @@ const luckyForm = reactive({
       value: 0.5,
     },
   ],
-  playMethods: luckyFormPlayMethods.redpacket,
+  playMethods: luckyDrawModel[0].name,
 })
 
 let newPro: number = 0

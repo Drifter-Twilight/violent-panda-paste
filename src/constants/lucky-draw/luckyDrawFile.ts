@@ -1,4 +1,4 @@
-export enum luckyFile {
+export enum luckyFileType {
   TXT = "txt",
   XLSX = "xlsx",
 }

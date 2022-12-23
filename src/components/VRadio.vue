@@ -19,17 +19,15 @@
 </template>
 
 <script setup lang="ts">
-interface RadioProps {
-  radioList: object
+const radioProps = defineProps<{
+  radioList: any[] | object
   modelVal: string | number | boolean
   radioBtn?: boolean
-}
-interface RadioEmits {
-  (e: "update:modelVal", modelVal: string | number | boolean): void
-}
+}>()
 
-const radioProps = defineProps<RadioProps>()
-const radioEmits = defineEmits<RadioEmits>()
+const radioEmits = defineEmits<{
+  (e: "update:modelVal", modelVal: string | number | boolean): void
+}>()
 
 let radioVal = $ref(radioProps.modelVal)
 function changeVal(currentVal: string | number | boolean) {

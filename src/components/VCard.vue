@@ -5,9 +5,9 @@
     :md="6"
     :lg="6"
     :xl="4"
-    class="p-1 sm:p-5 md:p-3 2xl:p-5 mt-2 cursor-pointer">
+    class="p-1 sm:p-5 md:p-3 2xl:p-5 mt-2">
     <div
-      class="flex justify-between items-center box h-20 sm:h-24 lg:h-28 2xl:h-32 overflow-hidden rounded-2xl transition-all hover:shadow-md hover:shadow-gray-400 bg-gradient-to-r text-white card_bg">
+      class="flex justify-between items-center box h-20 sm:h-24 lg:h-28 2xl:h-32 overflow-hidden rounded-2xl transition-all hover:shadow-md hover:shadow-gray-400 bg-gradient-to-r text-white card_bg cursor-pointer">
       <div
         class="relative flex justify-between items-start flex-col w-[55%] h-full pt-3 pb-4 ml-3 card_left-bg">
         <h1

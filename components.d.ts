@@ -25,7 +25,7 @@ declare module '@vue/runtime-core' {
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
-    ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElSwitch: typeof import("element-plus/es")["ElSwitch"]
     FileDetail: typeof import('./src/components/VFile/FileDetail.vue')['default']
     FileRead: typeof import('./src/components/VFile/FileRead.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
@@ -37,6 +37,6 @@ declare module '@vue/runtime-core' {
     VMain: typeof import('./src/components/VContainer/VMain.vue')['default']
     VRadio: typeof import('./src/components/VRadio.vue')['default']
     VscreenTip: typeof import('./src/components/VscreenTip.vue')['default']
-    VSwitchType: typeof import('./src/components/VSwitchType.vue')['default']
+    VSwitchButton: typeof import('./src/components/VSwitchButton.vue')['default']
   }
 }

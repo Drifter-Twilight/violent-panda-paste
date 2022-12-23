@@ -53,6 +53,7 @@ function formatData() {
 }
 
 let pieData = $ref(formatData())
+console.log(pieData)
 
 let option = reactive({
   series: [

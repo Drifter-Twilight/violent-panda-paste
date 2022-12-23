@@ -50,13 +50,19 @@
             label="表头级数">
             <el-input-number
               v-model="fileForm.theadLevel"
+              :disabled="
+                file.fileName.slice(file.fileName.indexOf('.')) == '.txt'
+              "
               :min="0" />
           </el-form-item>
 
           <el-form-item label="模式">
-            <v-radio
-              :radio-list="radioList"
-              v-model:model-val="modelVal" />
+            <el-radio-group v-model="fileForm.fileModel">
+              <el-radio
+                v-for="(item, index) in radioList"
+                :key="index"
+                :label="item.name" />
+            </el-radio-group>
           </el-form-item>
         </el-form>
       </el-row>
@@ -85,17 +91,12 @@
 <script setup lang="ts">
 import { reactive, onMounted, computed } from "vue"
 import { useRouter } from "vue-router"
-import VRadio from "@/components/VRadio.vue"
-import { useRollCallStore } from "@/stores/randomRollCall/"
-import parseFileData from "@/utils/parseFileData/"
 import { bus } from "@/eventBus/"
 
 const fileDetail = defineProps<{
-  radioList: object
-  toTarget: string
-  callback?: () => void
+  radioList: Model.TargetModel[]
+  callback?: (rawData: ArrayBuffer, type: string, th: number) => void
 }>()
-let modelVal = computed(() => fileDetail.toTarget)
 
 let drawer = $ref(false)
 let file = $ref<EventBus.FileInfo>({
@@ -114,13 +115,16 @@ onMounted(() => {
 
 const fileForm = reactive({
   theadLevel: 1,
+  fileModel: fileDetail.radioList[0].name,
 })
 
 const fileRouter = useRouter()
-const { setRollCallData } = useRollCallStore()
+let targetPath = computed(() =>
+  fileDetail.radioList.findIndex(item => item.name === fileForm.fileModel)
+)
 function submit() {
-  setRollCallData(parseFileData(file.data, fileForm.theadLevel))
-  fileRouter.push("/random-roll-call/roll-call")
+  fileDetail.callback?.(file.data, file.fileMIME, fileForm.theadLevel)
+  fileRouter.push(fileDetail.radioList[targetPath.value].path)
 }
 </script>
 

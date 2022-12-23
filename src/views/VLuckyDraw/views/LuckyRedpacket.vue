@@ -1,8 +1,8 @@
 <template>
-  <lucky-redpacket-base
+  <div
+    class="redpacket flex-center box p-5 h-50vh w-25vw"
     v-for="(item, index) in redpacketList"
     :key="`${index}redpacket`"
-    class="flex-center"
     @click="showContent(index)">
     <Transition
       appear
@@ -13,7 +13,7 @@
         {{ item }}
       </div>
     </Transition>
-  </lucky-redpacket-base>
+  </div>
 
   <el-button
     v-if="turnedOn"
@@ -30,12 +30,12 @@
 import { Transition } from "vue"
 import { storeToRefs } from "pinia"
 import { RefreshRight } from "@element-plus/icons-vue"
-import LuckyRedpacketBase from "../components/LuckyRedpacketBase.vue"
-import { useLuckyStore } from "@/stores/luckyDraw/"
+import { useLuckyStore } from "@/stores/luckyDraw"
 import getRandom from "@/utils/getRandom"
 import { luckyFormRadio } from "@/constants/lucky-draw/"
 
 const { proType, luckyData } = storeToRefs(useLuckyStore())
+
 let redpacketList = $ref(Array(8).fill(""))
 let turnedOn = $ref(false)
 function showContent(item: number) {
@@ -78,6 +78,12 @@ function refresh() {
 .redpacket_content {
   background-image: url("@/assets/images/redpacket-textbg.png");
   background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.redpacket {
+  background-image: url("@/assets/images/redpacket.svg");
+  background-size: 75%;
   background-repeat: no-repeat;
   background-position: center;
 }
