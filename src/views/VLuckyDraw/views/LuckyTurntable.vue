@@ -26,7 +26,7 @@ import { PieChart } from "echarts/charts"
 import { LabelLayout } from "echarts/features"
 import { CanvasRenderer } from "echarts/renderers"
 import { ElMessageBox } from "element-plus"
-import { useLuckyStore } from "@/stores/luckyDraw/"
+import { useLuckyStore } from "@/stores/useLuckyStore"
 import getRandom from "@/utils/getRandom"
 
 const { luckyData } = storeToRefs(useLuckyStore())
@@ -36,7 +36,7 @@ function formatData() {
   let startDeg = 0
   let endDeg = 0
 
-  return luckyData.value?.map((item, index) => {
+  return luckyData.value.map((item, index) => {
     itemDeg = 360 * +item.value
     startDeg = index == 0 ? 0 : endDeg + 1
     endDeg = startDeg + itemDeg - 1

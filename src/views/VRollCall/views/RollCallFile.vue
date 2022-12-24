@@ -10,15 +10,25 @@
     <v-file-read class="h-90vh" />
     <v-file-detail
       :radio-list="rollCallModel"
-      :to-target="rollCallModel.default" />
+      :callback="getRollCallData" />
   </el-col>
 </template>
 
 <script setup lang="ts">
 import VFileRead from "@/components/VFile/FileRead.vue"
 import VFileDetail from "@/components/VFile/FileDetail.vue"
-import { rollCallModel } from "@/constants/random-roll-call/"
-// import VLottie from "@/components/VLottie.vue"
+import { useRollCallStore } from "@/stores/useRollCallStore/"
+import { parseRollCallData } from "@/utils/parseData/parseRollCallData/"
+import { rollCallModel } from "@/constants/randomRollCall/"
+
+const { setRollCallData } = useRollCallStore()
+function getRollCallData(
+  data: ArrayBuffer,
+  fileMIME: string,
+  theadLevel: number
+) {
+  setRollCallData(new parseRollCallData(data).getXlsxData(theadLevel))
+}
 </script>
 
 <style scoped></style>

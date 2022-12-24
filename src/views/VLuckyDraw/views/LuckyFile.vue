@@ -16,8 +16,8 @@ import LuckyContainer from "../components/LuckyContainer.vue"
 import LuckyImg from "../components/LuckyImg.vue"
 import VFileRead from "@/components/VFile/FileRead.vue"
 import VFileDetail from "@/components/VFile/FileDetail.vue"
-import { luckyDrawModel, luckyFormRadio } from "@/constants/lucky-draw/"
-import { useLuckyStore } from "@/stores/luckyDraw/"
+import { luckyDrawModel, luckyFormRadio } from "@/constants/luckyDraw/"
+import { useLuckyStore } from "@/stores/useLuckyStore/"
 import { parseLuckyData } from "@/utils/parseData/paseLuckyData/"
 
 const { setProType, setLuckyData } = useLuckyStore()

@@ -8,7 +8,7 @@
     <div
       class="box flex justify-evenly items-center w-full text-3xl md:text-5xl tracking-wider">
       <p class="flex justify-end items-center flex-1 h-15vh text-right">
-        {{ id }}
+        {{ sId }}
       </p>
       <p class="flex-center flex-[1.3] h-15vh font-semibold text-center">
         {{ name }}
@@ -35,10 +35,10 @@
 </template>
 
 <script setup lang="ts">
-import { Transition, onUnmounted } from "vue"
+import { Transition, onUnmounted, computed } from "vue"
 import VLottie from "@/components/VLottie.vue"
 import { storeToRefs } from "pinia"
-import { useRollCallStore } from "@/stores/randomRollCall/"
+import { useRollCallStore } from "@/stores/useRollCallStore/"
 import getRandom from "@/utils/getRandom"
 
 let rollCallEnd = $ref(false)
@@ -47,16 +47,18 @@ const { rollCallData } = storeToRefs(useRollCallStore())
 
 let interval: NodeJS.Timer
 let timeout: NodeJS.Timeout
-let id = $ref<string | number | undefined>(0)
-let name = $ref<string | number>("---")
+let id = $ref<number | undefined>(0)
+let name = $ref<string>("---")
+
+let sId = computed(() => (id && id >= 10 ? id : `0${id}`))
 function startRollCall() {
   rollCallEnd = false
 
   let item = 0
   interval = setInterval(() => {
-    item = getRandom(1, rollCallData.value!.length - 1)
-    id = rollCallData.value![item]["id"]
-    name = rollCallData.value![item]["name"]
+    item = getRandom(1, rollCallData.value.length - 1)
+    id = rollCallData.value[item]["id"]
+    name = rollCallData.value[item]["name"]
   }, 50)
 
   timeout = setTimeout(() => {

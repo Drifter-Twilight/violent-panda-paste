@@ -1,4 +1,4 @@
-export default function parseLuckyXLSXData(sheet_0_Data: any[]) {
+export default function parseXlsxData(sheet_0_Data: any[]) {
   console.log(sheet_0_Data)
   let contentKey = sheet_0_Data[0]["A"] === "内容" ? "A" : "B"
   let valueKey = sheet_0_Data[0]["A"] === "概率" ? "A" : "B"

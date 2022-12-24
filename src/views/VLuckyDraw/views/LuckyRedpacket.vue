@@ -30,9 +30,9 @@
 import { Transition } from "vue"
 import { storeToRefs } from "pinia"
 import { RefreshRight } from "@element-plus/icons-vue"
-import { useLuckyStore } from "@/stores/luckyDraw"
+import { useLuckyStore } from "@/stores/useLuckyStore"
 import getRandom from "@/utils/getRandom"
-import { luckyFormRadio } from "@/constants/lucky-draw/"
+import { luckyFormRadio } from "@/constants/luckyDraw/"
 
 const { proType, luckyData } = storeToRefs(useLuckyStore())
 

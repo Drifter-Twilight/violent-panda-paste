@@ -1,10 +1,10 @@
 import { ref } from "vue"
 import { defineStore } from "pinia"
-import { luckyFormRadio } from "@/constants/lucky-draw/"
+import { luckyFormRadio } from "@/constants/luckyDraw"
 
 export const useLuckyStore = defineStore("luckyStore", () => {
   let proType = ref<luckyFormRadio>(luckyFormRadio.PROEQUAL)
-  let luckyData = ref<LuckyDraw.LuckyData[]>()
+  let luckyData = ref<LuckyDraw.LuckyData[]>([])
 
   function setProType(type: luckyFormRadio) {
     proType.value = type

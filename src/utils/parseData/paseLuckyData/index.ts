@@ -1,6 +1,6 @@
 import { parseData } from "../"
-import parseLuckyTXTData from "./parseLuckyTxtData"
-import parseLuckyXLSXData from "./parseLuckyXlsxData"
+import parseTxtData from "./parseTxtData"
+import parseXlsxData from "./parseXlsxData"
 import { fileType } from "@/constants/fileType/"
 
 export class parseLuckyData extends parseData {
@@ -28,12 +28,12 @@ export class parseLuckyData extends parseData {
     if (callback) {
       return callback(transitArr)
     } else {
-      return parseLuckyTXTData(transitArr)
+      return parseTxtData(transitArr)
     }
   }
 
   getXlsxData(thRange: number) {
     let sheet_0_data = super.getXlsxData(thRange)
-    return parseLuckyXLSXData(sheet_0_data)
+    return parseXlsxData(sheet_0_data)
   }
 }

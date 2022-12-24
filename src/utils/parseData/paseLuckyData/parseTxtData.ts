@@ -1,4 +1,4 @@
-export default function parseLuckyTXTData(transit: string[]) {
+export default function parseTxtData(transit: string[]) {
   let contentKey = transit.indexOf("内容")
   let valueKey = transit.indexOf("概率")
   let luckyTxtData: LuckyDraw.LuckyData[] = []
@@ -10,8 +10,6 @@ export default function parseLuckyTXTData(transit: string[]) {
       })
     }
   }
-
-  console.log(luckyTxtData)
 
   return luckyTxtData
 }

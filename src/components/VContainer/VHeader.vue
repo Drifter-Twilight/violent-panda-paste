@@ -63,7 +63,7 @@
 import { useRouter } from "vue-router"
 import { Sunny, Moon } from "@element-plus/icons-vue"
 import { storeToRefs } from "pinia"
-import { useThemeStore } from "@/stores/themeStore/"
+import { useThemeStore } from "@/stores/useThemeStore/"
 
 const { setDarkMode } = useThemeStore()
 let { darkMode } = storeToRefs(useThemeStore())

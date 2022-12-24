@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, watchEffect, type WatchStopHandle } from "vue"
 import { storeToRefs } from "pinia"
-import { useThemeStore } from "@/stores/themeStore/"
+import { useThemeStore } from "@/stores/useThemeStore/"
 
 let themeStore = storeToRefs(useThemeStore())
 let unwatch: WatchStopHandle

@@ -134,10 +134,10 @@ import { reactive } from "vue"
 import { useRouter } from "vue-router"
 import { ElMessage } from "element-plus"
 import { CirclePlus, CircleClose } from "@element-plus/icons-vue"
-import { useLuckyStore } from "@/stores/luckyDraw/"
+import { useLuckyStore } from "@/stores/useLuckyStore/"
 import LuckyContainer from "../components/LuckyContainer.vue"
 import LuckyImg from "../components/LuckyImg.vue"
-import { luckyFormRadio, luckyDrawModel } from "@/constants/lucky-draw"
+import { luckyFormRadio, luckyDrawModel } from "@/constants/luckyDraw"
 import type { FormInstance } from "element-plus"
 
 const luckyFormRulesRef = $ref<FormInstance>()
