@@ -1,6 +1,7 @@
 <template>
   <el-button
     circle
+    :disabled="disabled"
     class="flex-center box relative vtag_container hover:shadow-lg transition-all"
     :class="{ active: active }">
     <slot></slot>
@@ -10,7 +11,8 @@
 <script setup lang="ts">
 const tagProps = defineProps<{
   size: string
-  active: boolean
+  active?: boolean
+  disabled?: boolean
 }>()
 </script>
 

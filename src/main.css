@@ -28,3 +28,19 @@ body {
 .translate-half {
   transform: translate(-50%, -50%);
 }
+
+.-translate-x-half {
+  transform: translateX(-50%);
+}
+
+.-translate-y-half {
+  transform: translateY(-50%);
+}
+
+.translate-x-half {
+  transform: translateX(50%);
+}
+
+.translate-y-half {
+  transform: translateY(50%);
+}

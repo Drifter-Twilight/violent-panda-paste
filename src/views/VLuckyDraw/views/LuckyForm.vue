@@ -130,15 +130,14 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue"
+import { reactive, computed } from "vue"
 import { useRouter } from "vue-router"
-import { ElMessage } from "element-plus"
+import { ElMessage, type FormInstance } from "element-plus"
 import { CirclePlus, CircleClose } from "@element-plus/icons-vue"
 import { useLuckyStore } from "@/stores/useLuckyStore/"
 import LuckyContainer from "../components/LuckyContainer.vue"
 import LuckyImg from "../components/LuckyImg.vue"
 import { luckyFormRadio, luckyDrawModel } from "@/constants/luckyDraw"
-import type { FormInstance } from "element-plus"
 
 const luckyFormRulesRef = $ref<FormInstance>()
 const luckyForm = reactive({
@@ -206,7 +205,10 @@ async function getLuckyData(formEl: FormInstance | undefined) {
     } else {
       setProType(luckyForm.proType)
       setLuckyData(luckyForm.iptList)
-      formRouter.push("/lucky-draw/turntable")
+      let targetPath = computed(() =>
+        luckyDrawModel.findIndex(item => item.name === luckyForm.playMethods)
+      )
+      formRouter.push(luckyDrawModel[targetPath.value].path)
     }
   })
 }

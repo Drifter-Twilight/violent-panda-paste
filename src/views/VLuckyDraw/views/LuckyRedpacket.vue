@@ -24,12 +24,17 @@
     class="absolute left-[1/2] top-[1/2] -translate-x-1/2 -translate-y-1/2 z-10"
     >刷新</el-button
   >
+
+  <v-page-control
+    right-tip="大转盘"
+    right-path="turntable" />
 </template>
 
 <script setup lang="ts">
 import { Transition } from "vue"
 import { storeToRefs } from "pinia"
 import { RefreshRight } from "@element-plus/icons-vue"
+import VPageControl from "@/components/VPageControl.vue"
 import { useLuckyStore } from "@/stores/useLuckyStore"
 import getRandom from "@/utils/getRandom"
 import { luckyFormRadio } from "@/constants/luckyDraw/"

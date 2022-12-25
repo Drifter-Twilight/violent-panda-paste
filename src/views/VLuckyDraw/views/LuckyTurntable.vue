@@ -15,6 +15,9 @@
       >开始</el-button
     >
   </div>
+  <v-page-control
+    left-tip="红包抽奖"
+    left-path="redpacket" />
 </template>
 
 <script setup lang="ts">
@@ -26,6 +29,7 @@ import { PieChart } from "echarts/charts"
 import { LabelLayout } from "echarts/features"
 import { CanvasRenderer } from "echarts/renderers"
 import { ElMessageBox } from "element-plus"
+import VPageControl from "@/components/VPageControl.vue"
 import { useLuckyStore } from "@/stores/useLuckyStore"
 import getRandom from "@/utils/getRandom"
 
@@ -53,7 +57,6 @@ function formatData() {
 }
 
 let pieData = $ref(formatData())
-console.log(pieData)
 
 let option = reactive({
   series: [
