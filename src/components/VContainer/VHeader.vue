@@ -20,7 +20,6 @@
         :xs="6"
         :sm="3"
         :lg="2"
-        :xl="1"
         class="!flex justify-evenly items-center font-bold">
         <el-icon
           v-if="!darkMode"

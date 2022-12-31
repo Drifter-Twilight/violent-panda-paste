@@ -13,10 +13,9 @@ const props = defineProps<{
 }>()
 
 let animation = $ref(null)
+let res = await import(`../assets/lottie/${props.lottie}.json`)
 
 onMounted(async () => {
-  let res = await import(`../assets/lottie/${props.lottie}.json`)
-
   lottie.loadAnimation({
     container: animation!,
     renderer: "svg",

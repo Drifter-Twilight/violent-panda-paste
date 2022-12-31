@@ -11,7 +11,6 @@ export const useThemeStore = defineStore("themeStore", () => {
 
   function setDarkMode(isDark: boolean) {
     darkMode.value = toggleDark(isDark)
-    console.log(darkMode.value)
   }
 
   return { darkMode, setDarkMode }

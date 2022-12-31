@@ -1,6 +1,6 @@
 declare module RandomRollCall {
   interface RollCallData {
-    id?: number
+    id: number
     name: string
   }
 }

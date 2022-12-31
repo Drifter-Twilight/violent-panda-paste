@@ -10,7 +10,18 @@
         :card-color="item.cardColor"
         @click="skipToTarget(item.lottie)">
         <template #lottie>
-          <v-lottie :lottie="item.lottie" />
+          <Suspense>
+            <template #fallback>
+              <el-icon
+                size="2rem"
+                color="#615da4"
+                class="is-loading">
+                <Loading />
+              </el-icon>
+            </template>
+
+            <v-lottie :lottie="item.lottie" />
+          </Suspense>
         </template>
       </v-card>
     </el-row>
@@ -18,12 +29,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue"
+import { reactive, defineAsyncComponent, Suspense } from "vue"
 import { useRouter } from "vue-router"
+import { Loading } from "@element-plus/icons-vue"
 import VHeader from "@/components/VContainer/VHeader.vue"
 import VMain from "@/components/VContainer/VMain.vue"
 import VCard from "@/components/VCard.vue"
-import VLottie from "@/components/VLottie.vue"
+const VLottie = defineAsyncComponent(() => import("@/components/VLottie.vue"))
 
 const router = useRouter()
 

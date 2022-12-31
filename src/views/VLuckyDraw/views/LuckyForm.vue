@@ -4,7 +4,8 @@
       ref="luckyFormRulesRef"
       :model="luckyForm"
       label-position="top"
-      class="h-92vh pt-3 pr-3 pl-3">
+      :size="isLargeScreen ? 'large' : 'default'"
+      class="flex justify-center flex-col h-92vh pt-3 pr-3 pl-3">
       <el-form-item
         label="概率模式"
         prop="proType"
@@ -12,7 +13,8 @@
           required: true,
           message: '请选择一种模式',
           trigger: 'blur',
-        }">
+        }"
+        class="flex-1">
         <el-radio-group v-model="luckyForm.proType">
           <el-radio-button
             v-for="item in luckyFormRadio"
@@ -21,21 +23,23 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="内容 / 概率">
+      <el-form-item
+        label="内容 / 概率"
+        class="box flex-auto">
         <el-scrollbar
-          height="46vh"
-          class="pr-3">
+          :height="isLargeScreen ? '60vh' : '50vh'"
+          class="w-full pr-3">
           <el-form-item
             v-for="(item, index) in luckyForm.iptList"
             :key="item.id"
             class="mt-3">
             <el-col
-              :span="2"
+              :span="isLargeScreen ? 1 : 2"
               class="flex-evenly text-[#615da4]"
               >◈</el-col
             >
 
-            <el-col :span="9">
+            <el-col :span="isLargeScreen ? 10 : 9">
               <el-form-item
                 :prop="`iptList[${index}].name`"
                 :rules="{
@@ -50,12 +54,12 @@
             </el-col>
 
             <el-col
-              :span="2"
+              :span="isLargeScreen ? 1 : 2"
               class="flex-center"
               >-</el-col
             >
 
-            <el-col :span="9">
+            <el-col :span="isLargeScreen ? 7 : 9">
               <el-form-item
                 :prop="`iptList[${index}].value`"
                 :rules="{
@@ -80,7 +84,7 @@
               class="flex-center w-[10%]">
               <el-icon
                 v-if="index == luckyForm.iptList.length - 1"
-                size="20px"
+                size="1rem"
                 @click="addItem"
                 ><CirclePlus
               /></el-icon>
@@ -90,7 +94,7 @@
                   luckyForm.iptList.length > 2
                 "
                 @click="subItem(index)"
-                size="20px"
+                size="1rem"
                 ><CircleClose
               /></el-icon>
             </el-col>
@@ -105,7 +109,8 @@
           required: true,
           message: '请选择一种玩法',
           trigger: 'blur',
-        }">
+        }"
+        class="flex-1">
         <el-radio-group v-model="luckyForm.playMethods">
           <el-radio
             v-for="item in luckyDrawModel"
@@ -114,7 +119,7 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item>
+      <el-form-item class="!flex items-center flex-1">
         <el-button
           type="primary"
           round
@@ -131,13 +136,16 @@
 
 <script setup lang="ts">
 import { reactive, computed } from "vue"
+import { useMediaQuery } from "@vueuse/core"
 import { useRouter } from "vue-router"
 import { ElMessage, type FormInstance } from "element-plus"
 import { CirclePlus, CircleClose } from "@element-plus/icons-vue"
-import { useLuckyStore } from "@/stores/useLuckyStore/"
+import { usePageDataStore } from "@/stores/usePageDataStore"
 import LuckyContainer from "../components/LuckyContainer.vue"
 import LuckyImg from "../components/LuckyImg.vue"
 import { luckyFormRadio, luckyDrawModel } from "@/constants/luckyDraw"
+
+const isLargeScreen = useMediaQuery("(min-width: 1920px)")
 
 const luckyFormRulesRef = $ref<FormInstance>()
 const luckyForm = reactive({
@@ -184,7 +192,7 @@ function subItem(id: number) {
 }
 
 const formRouter = useRouter()
-const { setProType, setLuckyData } = useLuckyStore()
+const { setPageData } = usePageDataStore()
 async function getLuckyData(formEl: FormInstance | undefined) {
   if (!formEl) return
 
@@ -203,8 +211,12 @@ async function getLuckyData(formEl: FormInstance | undefined) {
         showClose: true,
       })
     } else {
-      setProType(luckyForm.proType)
-      setLuckyData(luckyForm.iptList)
+      setPageData({
+        luckyDraw: {
+          proType: luckyForm.proType,
+          data: luckyForm.iptList,
+        },
+      })
       let targetPath = computed(() =>
         luckyDrawModel.findIndex(item => item.name === luckyForm.playMethods)
       )

@@ -1,12 +1,9 @@
 <template>
   <el-drawer
-    v-model="drawer"
-    title="文件配置"
-    direction="rtl"
-    size="40%"
+    v-model="detailDialog"
     append-to-body
-    lock-scroll
     :with-header="false"
+    :size="isLargeScreen ? '40%' : '100%'"
     :close-on-click-modal="false">
     <el-scrollbar>
       <el-row class="content-start pl-2 pr-2">
@@ -14,7 +11,8 @@
           <el-descriptions
             title="文件信息"
             :column="1"
-            border>
+            border
+            :size="isLargeScreen ? 'large' : 'small'">
             <el-descriptions-item
               label-align="center"
               label="文件名">
@@ -80,7 +78,7 @@
         <el-button
           size="large"
           round
-          @click="drawer = false"
+          @click="detailDialog = false"
           >取消</el-button
         >
       </div>
@@ -91,15 +89,18 @@
 <script setup lang="ts">
 import { reactive, onMounted, computed } from "vue"
 import { useRouter } from "vue-router"
+import { useBreakpoints, breakpointsTailwind } from "@vueuse/core"
 import { bus } from "@/eventBus/"
 
-const fileDetail = defineProps<{
-  radioList: Model.TargetModel[]
-  callback?: (rawData: ArrayBuffer, type: string, th: number) => void
+const fileDetailProps = defineProps<{
+  radioList: Global.TargetModel[]
+  callback: (rawData: ArrayBuffer, type: string, th: number) => void
 }>()
 
-let drawer = $ref(false)
-let file = $ref<EventBus.FileInfo>({
+let detailDialog = $ref(false)
+let { greaterOrEqual } = useBreakpoints(breakpointsTailwind)
+let isLargeScreen = greaterOrEqual("md")
+let file = $ref<File.FileInfo>({
   fileName: "",
   data: new ArrayBuffer(0),
   fileSize: 0,
@@ -108,23 +109,23 @@ let file = $ref<EventBus.FileInfo>({
 })
 onMounted(() => {
   bus.on("getFileDetail", ({ showDrawer, fileInfo }) => {
-    drawer = showDrawer
+    detailDialog = showDrawer
     file = fileInfo
   })
 })
 
 const fileForm = reactive({
   theadLevel: 1,
-  fileModel: fileDetail.radioList[0].name,
+  fileModel: fileDetailProps.radioList[0].name,
 })
 
 const fileRouter = useRouter()
 let targetPath = computed(() =>
-  fileDetail.radioList.findIndex(item => item.name === fileForm.fileModel)
+  fileDetailProps.radioList.findIndex(item => item.name === fileForm.fileModel)
 )
 function submit() {
-  fileDetail.callback?.(file.data, file.fileMIME, fileForm.theadLevel)
-  fileRouter.push(fileDetail.radioList[targetPath.value].path)
+  fileDetailProps.callback(file.data, file.fileMIME, fileForm.theadLevel)
+  fileRouter.push(fileDetailProps.radioList[targetPath.value].path)
 }
 </script>
 

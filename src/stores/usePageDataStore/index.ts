@@ -1,14 +1,18 @@
+import { ref } from "vue"
 import { defineStore } from "pinia"
 
 export const usePageDataStore = defineStore("pageDataStore", () => {
-  let _cacheData: unknown
-  let pageData = function <T>(newData?: T) {
-    if (!newData) {
-      return _cacheData
-    } else {
-      _cacheData = newData
-    }
+  let pageData = ref<Global.PageData>({
+    luckyDraw: {
+      proType: "",
+      data: [],
+    },
+    rollCall: [],
+  })
+
+  function setPageData(newData: Partial<Global.PageData>) {
+    pageData.value = { ...pageData.value, ...newData }
   }
 
-  return { pageData }
+  return { pageData, setPageData }
 })

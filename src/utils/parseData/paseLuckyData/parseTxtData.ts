@@ -1,3 +1,5 @@
+import type { LuckyDraw } from "@/types/luckyDraw"
+
 export default function parseTxtData(transit: string[]) {
   let contentKey = transit.indexOf("内容")
   let valueKey = transit.indexOf("概率")

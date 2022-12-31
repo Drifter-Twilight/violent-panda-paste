@@ -2,7 +2,8 @@
   <el-scrollbar
     height="100vh"
     class="box w-[35vw]">
-    <h1 class="lucky_containier-title flex-center box h-8vh text-xl font-bold">
+    <h1
+      class="flex-center box h-8vh text-xl text-[var(--el-color-primary)] font-bold">
       - {{ title }} -
     </h1>
     <slot></slot>
@@ -14,9 +15,3 @@ const luckyContainierProps = defineProps<{
   title: string
 }>()
 </script>
-
-<style scoped>
-.lucky_containier-title {
-  color: var(--el-color-primary);
-}
-</style>

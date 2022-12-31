@@ -9,7 +9,7 @@
       enter-active-class="animate__animated animate__flip">
       <div
         v-if="item"
-        class="redpacket_content flex-center text-black write-vertical-left w-[70%] h-[95%] rounded-lg shadow-2xl">
+        class="redpacket_content box flex-center p-3 text-black write-vertical-left write-orient-upright w-[70%] h-[90%] !rounded-lg shadow-2xl font-semibold text-lg 2xl:text-xl">
         {{ item }}
       </div>
     </Transition>
@@ -19,9 +19,10 @@
     v-if="turnedOn"
     type="primary"
     size="large"
+    round
     :icon="RefreshRight"
     @click="refresh"
-    class="absolute left-[1/2] top-[1/2] -translate-x-1/2 -translate-y-1/2 z-10"
+    class="absolute left-[1/2] top-[1/2] -translate-x-1/2 -translate-y-1/2 z-20 !p-5"
     >刷新</el-button
   >
 
@@ -35,18 +36,20 @@ import { Transition } from "vue"
 import { storeToRefs } from "pinia"
 import { RefreshRight } from "@element-plus/icons-vue"
 import VPageControl from "@/components/VPageControl.vue"
-import { useLuckyStore } from "@/stores/useLuckyStore"
+import { usePageDataStore } from "@/stores/usePageDataStore"
 import getRandom from "@/utils/getRandom"
 import { luckyFormRadio } from "@/constants/luckyDraw/"
 
-const { proType, luckyData } = storeToRefs(useLuckyStore())
+const { pageData } = storeToRefs(usePageDataStore())
 
 let redpacketList = $ref(Array(8).fill(""))
 let turnedOn = $ref(false)
 function showContent(item: number) {
   if (redpacketList[item] === "") {
     redpacketList[item] =
-      proType.value == luckyFormRadio.PROEQUAL ? proEqual() : proDiY()
+      pageData.value.luckyDraw.proType == luckyFormRadio.PROEQUAL
+        ? proEqual()
+        : proDiY()
   }
 
   if (redpacketList.every(item => item)) {
@@ -55,22 +58,24 @@ function showContent(item: number) {
 }
 
 function proEqual() {
-  return luckyData.value?.[getRandom(0, luckyData.value?.length - 1)].name
+  return pageData.value.luckyDraw.data[
+    getRandom(0, pageData.value.luckyDraw.data.length - 1)
+  ].name
 }
 
 let i: number
-let proList = luckyData.value?.map(item => item.value)
+let proList = pageData.value.luckyDraw.data.map(item => item.value)
 let randomVal: number
 let result: number
 function proDiY() {
   randomVal = Math.random()
 
   i = 0
-  result = proList!.findIndex(item => {
+  result = proList.findIndex(item => {
     i += +item
     return randomVal < i
   })
-  return luckyData.value?.[result!].name
+  return pageData.value.luckyDraw.data[result].name
 }
 
 function refresh() {
@@ -80,15 +85,16 @@ function refresh() {
 </script>
 
 <style scoped>
-.redpacket_content {
-  background-image: url("@/assets/images/redpacket-textbg.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
 .redpacket {
   background-image: url("@/assets/images/redpacket.svg");
   background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.redpacket_content {
+  background-image: url("@/assets/images/redpacket-textbg.png");
+  background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
 }

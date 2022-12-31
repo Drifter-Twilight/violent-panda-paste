@@ -35,6 +35,7 @@ const luckyImgProps = defineProps<{
 
 const router = useRouter()
 const route = useRoute()
+
 function switchType(type: string) {
   router.push(type)
 }

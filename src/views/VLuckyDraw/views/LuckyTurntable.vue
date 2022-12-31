@@ -15,6 +15,7 @@
       >开始</el-button
     >
   </div>
+
   <v-page-control
     left-tip="红包抽奖"
     left-path="redpacket" />
@@ -30,17 +31,17 @@ import { LabelLayout } from "echarts/features"
 import { CanvasRenderer } from "echarts/renderers"
 import { ElMessageBox } from "element-plus"
 import VPageControl from "@/components/VPageControl.vue"
-import { useLuckyStore } from "@/stores/useLuckyStore"
+import { usePageDataStore } from "@/stores/usePageDataStore"
 import getRandom from "@/utils/getRandom"
 
-const { luckyData } = storeToRefs(useLuckyStore())
+const { pageData } = storeToRefs(usePageDataStore())
 
 function formatData() {
   let itemDeg = 0
   let startDeg = 0
   let endDeg = 0
 
-  return luckyData.value.map((item, index) => {
+  return pageData.value.luckyDraw.data.map((item, index) => {
     itemDeg = 360 * +item.value
     startDeg = index == 0 ? 0 : endDeg + 1
     endDeg = startDeg + itemDeg - 1

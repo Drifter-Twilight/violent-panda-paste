@@ -2,8 +2,8 @@
   <el-button
     circle
     :disabled="disabled"
-    class="flex-center box relative vtag_container hover:shadow-lg transition-all"
-    :class="{ active: active }">
+    class="flex-center box relative vtag_container shadow-lg transition-all"
+    :class="{ 'btn-active': active }">
     <slot></slot>
   </el-button>
 </template>
@@ -23,7 +23,7 @@ const tagProps = defineProps<{
   background-color: var(--el-bg-color);
 }
 
-.active::after {
+.btn-active::after {
   z-index: -1;
   position: absolute;
   content: "";

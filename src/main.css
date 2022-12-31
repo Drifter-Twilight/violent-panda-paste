@@ -12,11 +12,21 @@ html {
 }
 
 body {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  background-repeat: no-repeat;
-  /* background-size: 50% 100%; */
-  background-position: right bottom;
+}
+
+body::after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url("@/assets/images/body-bg.png");
+  opacity: 0.5;
 }
 
 .flex-center {

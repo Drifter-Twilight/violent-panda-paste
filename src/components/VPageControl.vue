@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute left-1/2 top-1/2 translate-half flex justify-between items-center h-12vh w-full z-10"
+    class="absolute left-1/2 top-1/2 translate-half flex justify-between items-center h-12vh w-full z-0"
     :class="{ 'pl-3 pr-3': active }">
     <el-tooltip
       :content="leftTip ? leftTip : '空'"
