@@ -2,7 +2,7 @@
 暴力熊猫贴
 
 纯前端教师课堂小工具集合
-
+主页：https://witts.gitee.io/violent-panda-paste
 
 
 ## 在本地运行
