@@ -1,9 +1,7 @@
-
 暴力熊猫贴
 
 纯前端教师课堂小工具集合
-主页：https://witts.gitee.io/violent-panda-paste
-
+主页：https://drifter-twilight.github.io/violent-panda-paste/
 
 ## 在本地运行
 
@@ -30,4 +28,3 @@ Clone 这个 violent-panda-paste
 ```bash
   npm run dev
 ```
-
